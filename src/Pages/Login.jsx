@@ -28,7 +28,7 @@ export default function Login() {
       setLoading(false);
     }
   };
-
+  
   return (
     <div className="min-h-screen flex md:flex-row flex-col bg-white">
       <div className="w-full md:w-1/2 flex flex-col justify-center p-10">
