@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginUser } from "../services/authServices";
+import { loginUser } from "../services/authServices"; // API call
 import { setProfile } from "../slices/authSlice";
 import loginImg from "../assets/login.jpg";
 
@@ -18,17 +18,22 @@ export default function Login() {
     setLoading(true);
     try {
       const res = await loginUser({ email, password });
-    
-      dispatch(setProfile({ user: res.user, token: res.token, expiresAt }));
+      
+      dispatch(setProfile({ 
+        user: res.user, 
+        token: res.token, 
+        expiresAt: res.expiresAt 
+      }));
+
       toast.success(res.message || "Login successful!");
-      navigate("/home");
+      navigate("/home"); 
     } catch (err) {
       toast.error(err.response?.data?.message || "Invalid credentials");
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <div className="min-h-screen flex md:flex-row flex-col bg-white">
       <div className="w-full md:w-1/2 flex flex-col justify-center p-10">

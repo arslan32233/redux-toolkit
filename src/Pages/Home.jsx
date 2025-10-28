@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { logout } from "../slices/authSlice";
-import { getAllUsers } from "../services/usersServices";
 import { useNavigate } from "react-router-dom";
+import { getAllUsers } from "../services/usersServices";
 
 export default function Home() {
   const { user, token, expiresAt } = useSelector((state) => state.auth);
@@ -11,7 +11,6 @@ export default function Home() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -24,6 +23,7 @@ export default function Home() {
     if (remainingTime <= 0) {
       dispatch(logout());
       navigate("/login");
+      toast.info("Session expired, logged out!");
       return;
     }
 
@@ -36,6 +36,7 @@ export default function Home() {
     return () => clearTimeout(timerRef.current);
   }, [token, expiresAt, dispatch, navigate]);
 
+  // Fetch users
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
