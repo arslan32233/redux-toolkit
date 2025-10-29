@@ -1,7 +1,14 @@
-// src/App.jsx
 import React from "react";
-import AppRoutes from "./AppRoutes";
+import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Routes from "./Routes.jsx";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
-  return <AppRoutes />;
+  return (
+    <BrowserRouter>
+      <Routes />
+      <ToastContainer position="top-right" autoClose={3000} />
+    </BrowserRouter>
+  );
 }

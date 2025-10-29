@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import signupImg from "../assets/login.jpg";
-import { signupUser } from "../services/authServices"; // Services ka API call
+import { signupUser } from "../services/index.js";
 
 export default function Signup() {
   const navigate = useNavigate();
